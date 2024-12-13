@@ -1,24 +1,20 @@
-// backend/server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
-const profileRoutes = require('./routes/profileRoutes');
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 
-// Routes
+// Auth routes
 app.use('/api/auth', authRoutes);
-app.use('/api/profile', profileRoutes);
 
-// Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/expense-tracker')
+// MongoDB connection
+mongoose.connect('mongodb+srv://pvshyamlal4:dxrjVfJFiEw9LHff@financialplannercluster.7sg2d.mongodb.net/?retryWrites=true&w=majority')
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('MongoDB connection error:', err));
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // Start server
 app.listen(5000, () => {

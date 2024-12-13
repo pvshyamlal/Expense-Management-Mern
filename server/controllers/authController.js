@@ -1,18 +1,6 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');  // Ensure this path is correct
-
-
-// Add this function to your authcontroller.js to retrieve all users
-exports.getAllUsers = async (req, res) => {
-  try {
-    // Fetch users from the MongoDB database
-    const users = await User.find();  // This fetches all users
-    res.status(200).json(users);  // Respond with the users in JSON format
-  } catch (error) {
-    console.error('Error fetching users:', error.message);  // Log the error for debugging
-    res.status(500).json({ message: `Error fetching users: ${error.message}` });  // Send error response
-  }
-};
 
 // Register User
 exports.register = async (req, res) => {

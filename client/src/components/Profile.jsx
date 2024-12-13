@@ -1,22 +1,10 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  // useNavigate for navigation
+import React from 'react';
 
 function Profile() {
-  const navigate = useNavigate();  // Use useNavigate for navigation
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      // If no token, redirect to login page
-      navigate('/login');
-    }
-  }, [navigate]);
-
   return (
-    <div>
-      <h2>Profile Page</h2>
-      <p>Welcome to your profile!</p>
-      {/* Display user's profile details here */}
+    <div className="profile-container">
+      <h2>Welcome to Your Profile</h2>
+      <p>You have successfully logged in!</p>
     </div>
   );
 }

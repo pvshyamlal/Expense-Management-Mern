@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Change to useNavigate for navigation
 import './Login.css';
 
@@ -9,26 +9,7 @@ function Login() {
   });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState([]); // State to hold users
   const navigate = useNavigate();  // Use useNavigate for navigation
-
-  useEffect(() => {
-    // Fetch registered users on component mount
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/auth/users'); // Fetch all users
-        const data = await response.json();
-        if (response.ok) {
-          setUsers(data); // Set users data into state
-        } else {
-          setMessage({ text: 'Error fetching users', type: 'error' });
-        }
-      } catch (error) {
-        setMessage({ text: 'Error fetching users', type: 'error' });
-      }
-    };
-    fetchUsers();
-  }, []); // Empty dependency array to run only once when component mounts
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,13 +74,6 @@ function Login() {
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-
-        <h3>Registered Users:</h3>
-        <ul>
-          {users.map((user) => (
-            <li key={user._id}>{user.email}</li> // Displaying email of registered users
-          ))}
-        </ul>
       </div>
     </div>
   );
