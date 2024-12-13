@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Change to useNavigate for navigation
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
@@ -9,7 +9,7 @@ function Login() {
   });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();  // Use useNavigate for navigation
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

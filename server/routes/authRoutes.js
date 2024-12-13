@@ -1,36 +1,51 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const User = require('../models/User'); // Replace with your User model path
+const User = require('../models/User');  // Ensure this path is correct
 
 // Register Route
 router.post('/register', async (req, res) => {
+  const { username, email, password } = req.body;
   try {
-    const { username, email, password } = req.body;
-
-    // Check if the user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create a new user
+    console.log('Entered Password:', password); // Debugging line
     const newUser = new User({
       username,
       email,
-      password: hashedPassword,
+      password, // Save the plain-text password directly
     });
 
-    // Save the user to MongoDB
     await newUser.save();
+    res.status(201).json({ message: 'User registered successfully!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error during registration' });
+  }
+});
 
-    res.status(201).json({ message: 'User registered successfully' });
+// Login Route
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    // Compare entered password with stored plain text password
+    console.log('Stored Password (Plain):', user.password);  // Debugging line
+    console.log('Entered Password:', password);  // Debugging line
+    if (password !== user.password) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    res.status(200).json({
+      message: 'Login successful',
+      userId: user._id,
+      username: user.username,
+    });
   } catch (error) {
-    console.error('Error registering user:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error during login:', error.message);
+    res.status(500).json({ message: 'Server error during login' });
   }
 });
 

@@ -1,0 +1,47 @@
+/* Profile Container */
+.profile-container {
+    background: linear-gradient(to bottom right, #ff7f50, #87cefa); /* Colorful background gradient */
+    padding: 50px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 100px auto;
+    color: white;
+  }
+  
+  /* Heading Style */
+  .profile-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Paragraph Style */
+  .profile-container p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    font-style: italic;
+  }
+  
+  /* Add a button style for user action */
+  .profile-container button {
+    background-color: #fff;
+    color: #ff7f50;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  .profile-container {
+    background-color: lightblue;
+    padding: 50px;
+  }
+  .profile-container button:hover {
+    background-color: #ff7f50;
+    color: white;
+  }
+  

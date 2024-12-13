@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -17,14 +16,8 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// You may want to hash the password before saving, though it's already being hashed in the controller during registration
-userSchema.pre('save', async function(next) {
-  if (this.isModified('password')) {
-    const hashedPassword = await bcrypt.hash(this.password, 10);
-    this.password = hashedPassword;
-  }
-  next();
-});
+// No pre-save hook to hash the password anymore
+// Ensure there is no code that hashes the password.
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
