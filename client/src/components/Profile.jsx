@@ -1,5 +1,4 @@
 import React from 'react';
-import './Profile.css';  // Ensure the path to the CSS file is correct
 
 function Profile() {
   return (
