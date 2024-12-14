@@ -8,13 +8,13 @@ function Register() {
     email: '',
     password: '',
   });
-  const [message, setMessage] = useState('');  // For error/success messages
+  const [message, setMessage] = useState(''); // For error/success messages
   const [loading, setLoading] = useState(false); // Loading state for the submit button
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Show loading state
-    setMessage('');  // Clear any previous messages
+    setMessage(''); // Clear any previous messages
 
     try {
       const response = await fetch('http://localhost:5000/api/auth/register', {
@@ -26,12 +26,12 @@ function Register() {
       });
 
       const data = await response.json();
-      setLoading(false);  // Stop loading state
+      setLoading(false); // Stop loading state
 
       if (response.ok) {
-        setMessage({ text: data.message, type: 'success' });  // Show success message
+        setMessage({ text: data.message, type: 'success' }); // Show success message
       } else {
-        setMessage({ text: data.message, type: 'error' });  // Show error message
+        setMessage({ text: data.message, type: 'error' }); // Show error message
       }
     } catch (error) {
       setLoading(false);
@@ -41,6 +41,11 @@ function Register() {
 
   return (
     <div className="register-container">
+      {/* Back to Home Link positioned at the top-right */}
+      <div className="home-link-top">
+        <Link to="/" className="link">← Back to Home</Link>
+      </div>
+
       <div className="register-form">
         <h2 className="register-heading">Register</h2>
 

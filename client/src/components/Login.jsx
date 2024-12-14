@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
@@ -13,8 +13,8 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);  // Start loading
-    setMessage('');  // Reset previous messages
+    setLoading(true);
+    setMessage('');
 
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
@@ -26,15 +26,12 @@ function Login() {
       });
 
       const data = await response.json();
-      setLoading(false);  // Stop loading
+      setLoading(false);
 
       if (response.ok) {
         setMessage({ text: data.message, type: 'success' });
-        // Store the token in localStorage
         localStorage.setItem('token', data.token);
-
-        // Redirect to profile page
-        navigate('/profile');  // Use navigate to redirect
+        navigate('/profile');
       } else {
         setMessage({ text: data.message, type: 'error' });
       }
@@ -46,6 +43,11 @@ function Login() {
 
   return (
     <div className="login-container">
+      {/* Back to Home Link positioned at the top-right */}
+      <div className="home-link-top">
+        <Link to="/" className="link">← Back to Home</Link>
+      </div>
+
       <div className="login-form">
         <h2 className="login-heading">Login</h2>
 

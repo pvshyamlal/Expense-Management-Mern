@@ -30,10 +30,6 @@ router.post('/login', async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
-
-    // Compare entered password with stored plain text password
-    console.log('Stored Password (Plain):', user.password);  // Debugging line
-    console.log('Entered Password:', password);  // Debugging line
     if (password !== user.password) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }

@@ -37,7 +37,7 @@
     transition: background-color 0.3s ease;
   }
   .profile-container {
-    background-color: lightblue;
+    background-color: rgb(230, 194, 173);
     padding: 50px;
   }
   .profile-container button:hover {
