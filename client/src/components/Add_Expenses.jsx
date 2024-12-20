@@ -1,106 +1,116 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import './Add_Expenses.css';
+// add_expenses.jsx
+import React, { useState } from "react";
+import "./Add_Expenses.css";
+import { useNavigate } from "react-router-dom"; // If you're using React Router
 
-function AddExpenses() {
+const AddExpenses = () => {
   const [formData, setFormData] = useState({
-    date: new Date(),
-    category: '',
-    description: '',
-    amount: '',
+    date: "",
+    category: "",
+    description: "",
+    amount: "",
   });
 
-  const handleDateChange = (date) => {
-    setFormData({ ...formData, date });
-  };
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitted Data:', formData);
-    // Add your submission logic here (e.g., API call)
-  };
 
-  const handleClear = () => {
-    setFormData({
-      date: new Date(),
-      category: '',
-      description: '',
-      amount: '',
-    });
+    try {
+      const response = await fetch("/api/add-expense", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSuccessMessage("Expense added successfully!");
+        setFormData({ date: "", category: "", description: "", amount: "" });
+        setTimeout(() => setSuccessMessage(""), 3000);
+      } else {
+        console.error("Failed to add expense");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
-    <div className="add-expenses-page">
-      <div className="add-expenses-container">
-        <h2>Add Expenses</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="date">Date:</label>
-            <DatePicker
-              selected={formData.date}
-              onChange={handleDateChange}
-              dateFormat="dd-MM-yyyy"
-              className="date-picker"
-            />
-          </div>
+    <div className="form-container">
+      {successMessage && (
+        <div className="alert-success" id="success-message">
+          <p>{successMessage}</p>
+        </div>
+      )}
 
-          <div className="form-group">
-            <label htmlFor="category">Category:</label>
-            <select
-              id="category"
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-            >
-              <option value="" disabled>Select a Category</option>
-              <option value="Food">Food</option>
-              <option value="Travel">Travel</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Others">Others</option>
-            </select>
-          </div>
+      <h2>Add Expenses</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value={formData.date}
+          onChange={handleInputChange}
+          required
+        />
 
-          <div className="form-group">
-            <label htmlFor="description">Description:</label>
-            <textarea
-              id="description"
-              name="description"
-              placeholder="Enter description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <label htmlFor="category">Category</label>
+        <select
+          id="category"
+          name="category"
+          value={formData.category}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="" disabled>
+            Select a category
+          </option>
+          <option value="Food">Food</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Others">Others</option>
+        </select>
 
-          <div className="form-group">
-            <label htmlFor="amount">Amount:</label>
-            <input
-              type="number"
-              id="amount"
-              name="amount"
-              placeholder="Enter amount"
-              value={formData.amount}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+          required
+        ></textarea>
 
-          <div className="form-buttons">
-            <button type="submit" className="submit-btn">Submit</button>
-            <button type="button" className="clear-btn" onClick={handleClear}>
-              Clear
-            </button>
-          </div>
-        </form>
-      </div>
+        <label htmlFor="amount">Amount (INR)</label>
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          step="0.01"
+          value={formData.amount}
+          onChange={handleInputChange}
+          required
+        />
+
+        <button type="submit">Submit</button>
+        <button
+          type="button"
+          className="btn-secondary"
+          onClick={() => navigate("/view-expenses")}
+        >
+          View Expenses
+        </button>
+      </form>
     </div>
   );
-}
+};
 
 export default AddExpenses;

@@ -1,126 +1,93 @@
-.add-expenses-container {
-    margin: 50px auto;
-    padding: 20px;
+/* add_expenses.css */
+.form-container {
+    margin: 20px auto;
     max-width: 400px;
-    background: #f4f4f4;
+    padding: 20px;
+    background: linear-gradient(to bottom right, #cdce73, #79cefc);
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-  
-.add-expenses-container h2 {
+
+.form-container h2 {
     text-align: center;
     margin-bottom: 20px;
 }
-  
-.add-expenses-container label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out; /* Smooth transition for glow effect */
-}
 
-/* Hover effect for form fields */
-.add-expenses-container input:hover,
-.add-expenses-container select:hover,
-.add-expenses-container textarea:hover,
-.date-picker:hover {
-    transform: translateY(-5px); /* Moves the field upwards */
-    box-shadow: 0 10px 10px #45a049; /* Adds shadow for lifted effect */
-}
-
-/* Glowing effect on label when input is hovered */
-.add-expenses-container input:hover ~ label,
-.add-expenses-container select:hover ~ label,
-.add-expenses-container textarea:hover ~ label,
-.date-picker:hover ~ label {
-    text-shadow: 0 0 10px yellow, 0 0 20px yellow, 0 0 30px yellow; /* Adds yellow glow effect to label */
-    color: yellow; /* Optional: Change label text color to yellow */
-}
-
-.add-expenses-container input,
-.add-expenses-container select,
-.add-expenses-container button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
-}
-
-.date-picker {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
-}
-
-.add-expenses-container button {
-    background: #4caf50;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-  
-.add-expenses-container button:hover {
-    background: #45a049;
-}
-  
-.form-group {
-    margin-bottom: 15px;
-}
-  
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-  
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: all 0.3s ease-in-out;
-}
-  
-.form-group textarea {
-    resize: vertical;
-    height: 80px;
-}
-  
-.form-buttons {
+.form-container form {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
-  
-.submit-btn,
-.clear-btn {
-    padding: 10px 15px;
+
+.form-container input,
+.form-container textarea,
+.form-container select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-container button {
+    padding: 10px;
+    background: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
 }
-  
-.submit-btn {
-    background-color: #4c6ef5;
+
+.form-container button:hover {
+    background: #0056b3;
+}
+
+.form-container .btn-secondary {
+    background: #f4f4f4;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.form-container .btn-secondary:hover {
+    background: #e4e4e4;
+}
+
+.alert-success {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: #4CAF50;
     color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: slide-in 0.5s ease-out, slide-out 0.5s ease-in 2.5s forwards;
 }
-  
-.submit-btn:hover {
-    background-color: #3b5bbf;
+
+@keyframes slide-in {
+    from {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
 }
-  
-.clear-btn {
-    background-color: #ccc;
-    color: black;
-}
-  
-.clear-btn:hover {
-    background-color: #999;
+
+@keyframes slide-out {
+    from {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+    }
 }
