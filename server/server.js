@@ -12,7 +12,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://pvshyamlal4:dxrjVfJFiEw9LHff@financialplannercluster.7sg2d.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://shyam:qkpjr3mzbm3fiBNl@financialplannercluster.7sg2d.mongodb.net/?retryWrites=true&w=majority')
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
